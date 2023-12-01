@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <link th:href="@{/css/AddingNews.css}" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<div class="addNewsContainer">
+  <form method="post" action="saveNews" th:object="${newsModel}">
+    <input class="form-control" type="text" placeholder=".form-control-lg" >
+    <input class="form-control" type="text" name="title" placeholder="Default input" >
+    <input class="form-control" type="text" name="content" placeholder=".form-control-sm" >
+      <input type="submit" name="sign-in" value="Vytvorit prispevok">
+  </form>
+</div>
+</body>
+</html>
+

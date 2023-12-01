@@ -1,0 +1,56 @@
+.login-main-container{
+    display: flex;
+    padding: 10px;
+    justify-content: center;
+}
+.form{
+    padding: 20px;
+    border-radius: 10px;
+    background: #939191;
+    margin: 10px;
+}
+.form h2{
+    text-align: center;
+    padding: 10px;
+}
+.form .input-box{
+    position: relative;
+    margin: 30px;
+    width: 100%;
+    height: 10%;
+}
+.input-box input{
+    width: 80%;
+    height: 100%;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    outline: none;
+    border-radius: 40px;
+    background: #b6cee7;
+    padding: 20px 45px 20px 20px;
+}
+
+.input-box i{
+    position: relative;
+    right: 15%;
+    top: 40%;
+    font-size: 20px;
+    transform: translateY(-50%);
+}
+
+.form .btn{
+    width: 80%;
+    height: 60%;
+    background: #81f36e;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+}
+
+.registe-link{
+    font-size: 14.5px;
+    text-align: center;
+}
+
+.registe-link a:hover{
+    text-decoration: underline;
+}
