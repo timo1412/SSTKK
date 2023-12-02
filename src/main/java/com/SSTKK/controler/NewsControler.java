@@ -28,7 +28,7 @@ public class NewsControler {
         return "pages/AddingNews_page";
     }
 
-    @PostMapping("/saveNews")
+    @PostMapping("/addNews")
     public String AddNewNews(@ModelAttribute NewsModel newsModel){
         if (newsServices.addNew(newsModel)){
             return "redirect:/newsList";

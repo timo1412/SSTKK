@@ -1,4 +1,6 @@
-.addNewsContainer{
-    display: flex;
-    align-items: center;
+.addingForm{
+    margin: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
 }

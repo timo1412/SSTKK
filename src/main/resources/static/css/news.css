@@ -5,3 +5,11 @@
 .button-add a{
     width: 50%;
 }
+
+.container-cards .card{
+    margin: 10px;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+

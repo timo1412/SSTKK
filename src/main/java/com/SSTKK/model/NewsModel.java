@@ -15,6 +15,17 @@ public class NewsModel {
     @Column
     private String content;
 
+    @Column
+    private String creator;
+
+    public String getCreator() {
+        return creator;
+    }
+
+    public void setCreator(String creator) {
+        this.creator = creator;
+    }
+
     public NewsModel(){
 
     }
