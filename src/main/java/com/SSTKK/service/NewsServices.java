@@ -25,9 +25,14 @@ public class NewsServices {
     public boolean addNew(NewsModel newsModel){
         NewsModel savedNewsModel = newsRepository.save(newsModel);
         return newsRepository.findById(savedNewsModel.getId()) != null ? true : false;
+
     }
 
     public NewsModel getNewsById(Integer id){
         return newsRepository.findById(id).get();
+    }
+
+    public void update(NewsModel news) {
+        newsRepository.updateNewsWithId(news.getId(), news.getContent(), news.getTitle());
     }
 }

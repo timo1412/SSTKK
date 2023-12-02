@@ -6,10 +6,7 @@ import com.SSTKK.service.NewsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +30,15 @@ public class NewsControler {
         if (newsServices.addNew(newsModel)){
             return "redirect:/newsList";
         }
+
         return "pages/error_page";
     }
-    @GetMapping("/editingNews/{id}")
-    public String EditNews(@PathVariable Integer id, Model model){
-        model.addAttribute("news",newsServices.getNewsById(id));
-        return "pages/editingNews";
+    @GetMapping("/editingNews")
+    public String EditNews(@RequestParam("id") Integer id, Model model){
+        NewsModel news = newsServices.getNewsById(id);
+
+        model.addAttribute("news", news);
+        return "pages/editingNews_page";
     }
 
 }
