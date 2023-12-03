@@ -15,11 +15,12 @@
       <li>
         <a href="/newsList">Novinky</a>
       </li>
-      <li>
-        <a href="/login">Prihlasiť sa</a>
+      <li th:with="userSession=${session.user}">
+        <a href="#" th:if="${userSession}" th:text="${userSession.email}" ></a>
+        <a href="/user/login" th:unless="${userSession}">Prihlasiť sa</a>
       </li>
       <li>
-        <a href="/trainings">Treningy</a>
+        <a href="/user/trainings">Treningy</a>
       </li>
       <li>
         <a href="#" >História</a>

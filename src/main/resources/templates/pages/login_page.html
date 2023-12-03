@@ -10,7 +10,7 @@
 
 <header th:replace="~{fragments/navbar}"></header>
 <div class="login-main-container">
-  <form class="login login form" method="post" action="/login" th:object="${loginRequest}">
+  <form class="login login form" method="post" action="/user/login" th:object="${loginRequest}">
     <h2>Prihlásiť</h2>
     <div class="input-box">
       <input type="text" name="login" placeholder="Login" required>
@@ -25,7 +25,7 @@
       <button type="submit" class="btn" name="sign-in">Prihlásiť</button>
     </div>
     <div class="registe-link" >
-      <a href="/register">Vytvoriť účet</a>
+      <a href="/user/register">Vytvoriť účet</a>
     </div>
 
   </form>

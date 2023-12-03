@@ -7,11 +7,11 @@
 </head>
 <body>
 <div class="addNewsContainer">
-  <form method="post" action="saveNews" th:object="${newsModel}">
-    <input class="form-control" type="text"  >
-    <input th:value="${news.getTitle()}" class="form-control" type="text" name="title" placeholder="upravene" >
-    <input class="form-control" type="text" name="content" placeholder="upravene">
-    <input type="submit" name="sign-in" value="Upravit prispevok">
+  <form method="post" th:action="/editNews" th:object="${newsModel}">
+    <input th:value="${news.getCreator()}" class="form-control" type="text" name="creator" >
+    <input th:value="${news.getTitle()}" class="form-control" type="text" name="title" >
+    <input th:value="${news.getContent()}" class="form-control" type="text" name="content" >
+    <input type="submit" name="content" value="Upravit prispevok">
   </form>
 </div>
 </body>

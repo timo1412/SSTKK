@@ -30,15 +30,28 @@ public class NewsControler {
         if (newsServices.addNew(newsModel)){
             return "redirect:/newsList";
         }
-
         return "pages/error_page";
+    }
+    @PostMapping("editNews")
+    public String editNews(@ModelAttribute NewsModel newsModel){
+        newsServices.update(newsModel);
+        return "redirect:/newsList";
     }
     @GetMapping("/editingNews")
     public String EditNews(@RequestParam("id") Integer id, Model model){
         NewsModel news = newsServices.getNewsById(id);
-
         model.addAttribute("news", news);
         return "pages/editingNews_page";
     }
 
+
+
+    @PostMapping("deleteingNews")
+    public String deleteNews(@ModelAttribute NewsModel newsModel){
+        newsServices.deleteNew(newsModel.getId());
+        if (newsServices.getNewsById(newsModel.getId()) == null){
+            return "redirect:/newsList";
+        }
+        return "pages/error_page";
+    }
 }

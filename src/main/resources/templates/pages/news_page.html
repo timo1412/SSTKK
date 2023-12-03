@@ -20,7 +20,7 @@
       <h5 class="card-title"  th:text="${news.getCreator()}"></h5>
       <p class="card-text" th:text="${news.getContent()}" ></p>
       <a th:href="@{/editingNews(id=${news.getId()})}"  class="btn btn-warning">Upravit</a>
-      <a class="btn btn-danger">Zmazat</a>
+      <a th:href="@{/deleteingNews(id=${news.getId()})}" class="btn btn-danger">Zmazat</a>
     </div>
   </div>
 </div>

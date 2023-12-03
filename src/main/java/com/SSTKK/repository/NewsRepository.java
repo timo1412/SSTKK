@@ -13,6 +13,6 @@ public interface NewsRepository extends JpaRepository<NewsModel,Integer> {
     @Modifying
     @Transactional
     @Query("update NewsModel n set n.title = :newTitle, n.content = :newContent where n.id = :newsId")
-    void updateNewsWithId(@Param("newsId") Integer newsId, @Param("content") String newContent, @Param("title") String newTitle);
+    void updateNewsWithId(@Param("newsId") Integer newsId, @Param("newContent") String newContent, @Param("newTitle") String newTitle);
 
 }
