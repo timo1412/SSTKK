@@ -1,15 +1,11 @@
 package com.SSTKK.controler;
 
-import com.SSTKK.model.AnimeModel;
 import com.SSTKK.model.NewsModel;
 import com.SSTKK.service.NewsServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class NewsControler {
@@ -44,12 +40,16 @@ public class NewsControler {
         return "pages/editingNews_page";
     }
 
-
-
-    @PostMapping("deleteingNews")
+    @GetMapping("deleteNews")
+    public String getDeleteNewsPage(@RequestParam("id") Integer id, Model model){
+        NewsModel news = newsServices.getNewsById(id);
+        model.addAttribute("news", news);
+        return "pages/deleteNews_page";
+    }
+    @PostMapping("deleteNews")
     public String deleteNews(@ModelAttribute NewsModel newsModel){
-        newsServices.deleteNew(newsModel.getId());
-        if (newsServices.getNewsById(newsModel.getId()) == null){
+        System.out.println(newsModel.getId());
+        if (newsServices.deleteNew(newsModel.getId())){
             return "redirect:/newsList";
         }
         return "pages/error_page";
