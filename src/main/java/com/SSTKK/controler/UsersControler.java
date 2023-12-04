@@ -53,7 +53,7 @@ public class UsersControler {
     public String register(@ModelAttribute UsersModel usersModel){
         System.out.println("register request:  " + usersModel);
         UsersModel registeredUser = usersService.registrationuser(usersModel.getLogin(),usersModel.getPassword(),usersModel.getEmail());
-        return registeredUser == null ? "pages/user/error_page" : "redirect:/login";
+        return registeredUser == null ? "pages/user/error_page" : "redirect:/user/login";
     }
 
     @PostMapping("/login")
