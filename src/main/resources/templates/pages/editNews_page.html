@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" >
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link th:href="@{/css/AddingNews.css}" rel="stylesheet" type="text/css" >
+</head>
+<body>
+<header th:replace="~{fragments/navbar}"></header>
+<form method="post" th:object="${news}" th:action="editNews" >
+  <input class="form-control" type="text" name="creator" th:value="${news.getCreator()}">
+  <input class="form-control" type="text" name="title" th:value="${news.getTitle()}">
+  <input class="form-control" type="text" name="content" th:value="${news.getContent()}">
+  <input class="form-control" type="text" name="id" th:value="${news.getId()}" readonly style="display: none">
+  <button type="submit" class="btn btn-warning">Upraviť príspevok</button>
+</form>
+</body>
+</html>
+
+
+<!--<div class="addNewsContainer">
+  <form method="post" th:object="${news}" th:action="deleteNews">
+    <input th:value="${n}" >
+  </form>
+</div>-->
+
+
+<!--<input class="form-control" type="text" name="creator" th:value="${news.getCreator()e}">
+<input class="form-control" type="text" name="title" th:value="${news.getTitle()}" >
+<input class="form-control" type="text" name="content" th:value="${news.getContent()}">
+<input class="form-control" type="text" name="content" th:value="${news.}">
+<input type="submit" name="sign-in" value="Upravit prispevok">-->

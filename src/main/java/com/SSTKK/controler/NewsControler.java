@@ -33,11 +33,11 @@ public class NewsControler {
         newsServices.update(newsModel);
         return "redirect:/newsList";
     }
-    @GetMapping("/editingNews")
+    @GetMapping("/editNews")
     public String EditNews(@RequestParam("id") Integer id, Model model){
         NewsModel news = newsServices.getNewsById(id);
         model.addAttribute("news", news);
-        return "pages/editingNews_page";
+        return "pages/editNews_page";
     }
 
     @GetMapping("deleteNews")
