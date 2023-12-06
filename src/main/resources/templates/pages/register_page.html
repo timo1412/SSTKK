@@ -20,17 +20,39 @@
             <input type="email" name="email" placeholder="Email">
             <i class='bx bx-envelope' ></i>
         </div>
-        <div class="input-box">
+        <div class="input-box passwordVal" >
             <input type="password" name="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required>
             <i class='bx bxs-lock-alt' ></i>
         </div>
+        <p>Heslo musí obsahovať aspoň</p>
+        <ul class="requirements-password">
+            <li>
+                <i class='bx bx-x-circle'></i>
+                <span>8 znakov</span>
+            </li>
+            <li>
+                <i class='bx bx-x-circle'></i>
+                <span>Čísla 0-9</span>
+            </li>
+            <li>
+                <i class='bx bx-x-circle'></i>
+                <span>Malé písmeno</span>
+            </li>
+            <li>
+                <i class='bx bx-x-circle'></i>
+                <span>Špecialny znak</span>
+            </li>
+            <li>
+                <i class='bx bx-x-circle'></i>
+                <span>Veľké písmeno</span>
+            </li>
+        </ul>
         <div class="input-box">
             <button type="submit" class="btn" name="sign-in">Registrovať</button>
         </div>
-        <a href="/">Navigate to main page</a>
     </form>
 </div>
-
+<script src="/javascript/validation.js" defer></script>
 
 </body>
 </html>

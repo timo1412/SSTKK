@@ -1,8 +1,6 @@
 const passwordInput = document.querySelector(".passwordVal input");
 const icon = document.querySelector(".passwordVal i");
 const requirementsList = document.querySelectorAll(".requirements-password li");
-
-
 const requirements = [
     {regex: /.{8,}/, index :0},
     {regex: /[0-9]/, index :1},
@@ -10,7 +8,6 @@ const requirements = [
     {regex: /[^A-Za-z0-9]/, index :3},
     {regex: /[A-Z]/, index :4}
 ]
-
 passwordInput.addEventListener("keyup" , (e ) => {
     requirements.forEach(item => {
         const isValid = item.regex.test(e.target.value);
@@ -22,7 +19,6 @@ passwordInput.addEventListener("keyup" , (e ) => {
         }
     });
 });
-
 icon.addEventListener("click", () => {
     passwordInput.type = passwordInput.type === "password" ? "text" : "password";
     icon.className =passwordInput.type === "password" ? "bx bxs-lock-alt" : "bx bxs-low-vision";
