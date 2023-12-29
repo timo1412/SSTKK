@@ -16,7 +16,10 @@
         <a href="/newsList">Novinky</a>
       </li>
       <li th:with="userSession=${session.user}">
-        <a href="#" th:if="${userSession}" th:text="${userSession.email}" ></a>
+        <a href="#" th:if="${userSession}"  th:text="${userSession.email}" ></a>
+        <ul class="dropdown" th:if="${userSession}" >
+          <li><a th:href="@{/user/logout}">Odhlasit sa</a></li>
+        </ul>
         <a href="/user/login" th:unless="${userSession}">Prihlasiť sa</a>
       </li>
       <li>

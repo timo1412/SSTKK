@@ -10,9 +10,9 @@ public class NewsModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
-    @Column
+    @Column(nullable = false)
     private String title;
-    @Column
+    @Column (length = 500)
     private String content;
 
     @Column

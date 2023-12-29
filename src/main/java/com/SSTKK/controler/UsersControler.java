@@ -1,13 +1,11 @@
 package com.SSTKK.controler;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import com.SSTKK.model.UsersModel;
 import com.SSTKK.service.UsersService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping(value = "/user")
@@ -55,12 +53,21 @@ public class UsersControler {
         UsersModel registeredUser = usersService.registrationuser(usersModel.getLogin(),usersModel.getPassword(),usersModel.getEmail());
         return registeredUser == null ? "pages/user/error_page" : "redirect:/user/login";
     }
+    @RequestMapping(value = "/logout",method = RequestMethod.GET)
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        session.invalidate();
+        return "redirect:/";
+    }
 
     @PostMapping("/login")
     public String login(@ModelAttribute UsersModel usersModel, Model model,HttpSession session){
         System.out.println("login request:  " + usersModel);
         UsersModel authenticated = usersService.authenticate(usersModel.getLogin(),usersModel.getPassword());
-        if (authenticated != null){
+        if (authenticated != null &&
+                (authenticated.getEmail() != null || !authenticated.getEmail().isEmpty())
+        ){
             session.setAttribute("user", authenticated);
             model.addAttribute("userLogin", authenticated.getLogin());
             return "redirect:/";

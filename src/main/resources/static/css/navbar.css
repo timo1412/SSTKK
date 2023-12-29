@@ -29,6 +29,7 @@ body{
 .nav-bar_me ul{
     display: flex;
 }
+
 .nav-bar_me ul li a {
     display: block;
     color: #fefefe;
@@ -38,6 +39,7 @@ body{
     transition: 0.2s;
     margin: 0 5px;
 }
+
 .nav-bar_me ul li a:hover{
     color: black;
     background: #fefefe ;
@@ -98,7 +100,21 @@ body{
     }
 }
 
+ul li ul.dropdown{
+    display: block;
+}
 
+ul li:hover ul.dropdown{
+    display: block;
+    background: #444444;
+}
+
+ul li ul.dropdown{
+    display: none;
+    width: 100%;
+    position: absolute;
+    z-index: 999;
+}
 
 
 
