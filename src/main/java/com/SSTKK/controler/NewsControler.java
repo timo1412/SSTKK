@@ -23,6 +23,9 @@ public class NewsControler {
 
     @PostMapping("/addNews")
     public String AddNewNews(@ModelAttribute NewsModel newsModel){
+        if (newsModel.getCreator().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getContent().isEmpty()){
+            return "pages/error_page";
+        }
         if (newsServices.addNew(newsModel)){
             return "redirect:/newsList";
         }
@@ -30,6 +33,9 @@ public class NewsControler {
     }
     @PostMapping("editNews")
     public String editNews(@ModelAttribute NewsModel newsModel){
+        if (newsModel.getContent().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getCreator().isEmpty()){
+            return "pages/error_page";
+        }
         newsServices.update(newsModel);
         return "redirect:/newsList";
     }

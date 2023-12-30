@@ -1,4 +1,5 @@
 package com.SSTKK.controler;
+import com.SSTKK.repository.UsersRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import com.SSTKK.model.UsersModel;
@@ -51,7 +52,10 @@ public class UsersControler {
     public String register(@ModelAttribute UsersModel usersModel){
         System.out.println("register request:  " + usersModel);
         UsersModel registeredUser = usersService.registrationuser(usersModel.getLogin(),usersModel.getPassword(),usersModel.getEmail());
-        return registeredUser == null ? "pages/user/error_page" : "redirect:/user/login";
+        if (registeredUser.getEmail().isEmpty() || registeredUser.getLogin().isEmpty() || registeredUser.getPassword().isEmpty()){
+            return "pages/error_page";
+        }
+        return registeredUser == null ? "pages/error_page" : "redirect:/user/login";
     }
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpServletRequest request){
@@ -66,13 +70,13 @@ public class UsersControler {
         System.out.println("login request:  " + usersModel);
         UsersModel authenticated = usersService.authenticate(usersModel.getLogin(),usersModel.getPassword());
         if (authenticated != null &&
-                (authenticated.getEmail() != null || !authenticated.getEmail().isEmpty())
+                (authenticated.getLogin() != null || !authenticated.getLogin().isEmpty())
         ){
             session.setAttribute("user", authenticated);
             model.addAttribute("userLogin", authenticated.getLogin());
             return "redirect:/";
         }else {
-            return "pages/user/error_page";
+            return "pages/error_page";
         }
     }
 }
