@@ -9,12 +9,8 @@
   </div>
   <nav class="nav-bar_me">
     <ul>
-      <li>
-        <a href="/" class="active_me">Domov</a>
-      </li>
-      <li>
-        <a href="/newsList">Novinky</a>
-      </li>
+      <li><a href="/" class="active_me">Domov</a></li>
+      <li><a href="/newsList">Novinky</a></li>
       <li th:with="userSession=${session.user}">
         <a href="#" th:if="${userSession}"  th:text="${userSession.email}" ></a>
         <ul class="dropdown" th:if="${userSession}" >
@@ -22,15 +18,9 @@
         </ul>
         <a href="/user/login" th:unless="${userSession}">Prihlasiť sa</a>
       </li>
-      <li>
-        <a href="/user/trainings">Treningy</a>
-      </li>
-      <li>
-        <a href="#" >História</a>
-      </li>
-      <li>
-        <a href="#" >Členovia</a>
-      </li>
+      <li><a href="/user/trainings">Treningy</a></li>
+      <li><a href="#" >História</a></li>
+      <li><a href="#" >Členovia</a></li>
     </ul>
   </nav>
 </header>

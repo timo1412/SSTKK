@@ -9,7 +9,7 @@
 <body>
 <header th:replace="~{fragments/navbar}"></header>
 <div class="addingForm">
-    <form method="post" action="addNews">
+    <form method="post" action="addNews" enctype="multipart/form-data">
         <div class="mb-3">
             <label  class="form-label">Vytvoril</label>
             <input type="text" class="form-control" name="creator"  placeholder="Meno autora príspevku">
@@ -22,11 +22,13 @@
             <label for="exampleFormControlTextarea1" class="form-label">Podrobnosti príspevku</label>
             <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
         </div>
+        <div class="mb-3">
+            <label for="pdfFile" class="form-label">Vyberte súbor (PDF)</label>
+            <input id="pdfFile" type="file" class="form-control" name="pdfFile" accept=".pdf">
+        </div>
         <button class="btn btn-success" >Vytvoriť príspevok</button>
     </form>
-
 </div>
-
 </body>
 </html>
 

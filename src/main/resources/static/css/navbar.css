@@ -30,7 +30,7 @@ body{
     display: flex;
 }
 
-.nav-bar_me ul li a {
+.nav-bar_me ul li a,ul li a {
     display: block;
     color: #fefefe;
     font-size: 15px;

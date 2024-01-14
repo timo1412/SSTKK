@@ -3,9 +3,15 @@ package com.SSTKK.controler;
 import com.SSTKK.model.NewsModel;
 import com.SSTKK.service.NewsServices;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+
 
 @Controller
 public class NewsControler {
@@ -21,8 +27,22 @@ public class NewsControler {
         return "pages/AddingNews_page";
     }
 
+    @GetMapping("/downloadPdf")
+    public ResponseEntity<byte[]> downloadPdf(@RequestParam("id") int id) {
+        NewsModel news = newsServices.getNewsById(id);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "file.pdf");  // Názov súboru
+
+        return new ResponseEntity<>(news.getPdfContent(), headers, HttpStatus.OK);
+    }
+
     @PostMapping("/addNews")
-    public String AddNewNews(@ModelAttribute NewsModel newsModel){
+    public String AddNewNews(@ModelAttribute NewsModel newsModel,
+                             @RequestParam("pdfFile") MultipartFile pdfFile){
+
+        newsModel.setPdfFile(pdfFile);
         if (newsModel.getCreator().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getContent().isEmpty()){
             return "pages/error_page";
         }

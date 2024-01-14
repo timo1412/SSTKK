@@ -1,7 +1,9 @@
 package com.SSTKK.model;
 
 import jakarta.persistence.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.Date;
 
 @Entity
@@ -14,9 +16,15 @@ public class NewsModel {
     private String title;
     @Column (length = 500)
     private String content;
-
     @Column
     private String creator;
+
+    @Lob
+    @Column(name = "pdf_content", length = 1000)
+    private byte[] pdfContent;
+
+    @Transient
+    private MultipartFile pdfFile;
 
     public String getCreator() {
         return creator;
@@ -53,4 +61,21 @@ public class NewsModel {
     public void setContent(String content) {
         this.content = content;
     }
+
+    public byte[] getPdfContent() {
+        return pdfContent;
+    }
+
+    public void setPdfContent(byte[] pdfContent) {
+        this.pdfContent = pdfContent;
+    }
+
+    public MultipartFile getPdfFile() {
+        return pdfFile;
+    }
+
+    public void setPdfFile(MultipartFile pdfFile) {
+        this.pdfFile = pdfFile;
+    }
+
 }

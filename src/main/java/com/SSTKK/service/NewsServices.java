@@ -4,7 +4,9 @@ import com.SSTKK.model.NewsModel;
 import com.SSTKK.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +25,18 @@ public class NewsServices {
         return newsRepository.findById(id) != null ? true: false;
     }
     public boolean addNew(NewsModel newsModel){
+        MultipartFile pdfFile = newsModel.getPdfFile();
+        if (pdfFile != null && !pdfFile.isEmpty()) {
+            try {
+                byte[] pdfContent = pdfFile.getBytes();
+                newsModel.setPdfContent(pdfContent);
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
         NewsModel savedNewsModel = newsRepository.save(newsModel);
         return newsRepository.findById(savedNewsModel.getId()) != null ? true : false;
-
     }
 
     public NewsModel getNewsById(Integer id){
