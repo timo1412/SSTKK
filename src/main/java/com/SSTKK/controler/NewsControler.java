@@ -1,5 +1,4 @@
 package com.SSTKK.controler;
-
 import com.SSTKK.model.NewsModel;
 import com.SSTKK.service.NewsServices;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +21,7 @@ public class NewsControler {
         model.addAttribute("newsList",newsServices.getAllNews());
         return "pages/news_page";
     }
+
     @GetMapping("/addNews")
     public String getAddingPage() {
         return "pages/AddingNews_page";
@@ -37,13 +37,13 @@ public class NewsControler {
 
         return new ResponseEntity<>(news.getPdfContent(), headers, HttpStatus.OK);
     }
-
     @PostMapping("/addNews")
     public String AddNewNews(@ModelAttribute NewsModel newsModel,
-                             @RequestParam("pdfFile") MultipartFile pdfFile){
+                             @RequestParam("pdfFile") MultipartFile pdfFile,Model model){
 
         newsModel.setPdfFile(pdfFile);
         if (newsModel.getCreator().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getContent().isEmpty()){
+            model.addAttribute("Error_mess","Dojebal si to");
             return "pages/error_page";
         }
         if (newsServices.addNew(newsModel)){

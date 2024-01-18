@@ -18,7 +18,6 @@ public class NewsModel {
     private String content;
     @Column
     private String creator;
-
     @Lob
     @Column(name = "pdf_content", length = 1000)
     private byte[] pdfContent;

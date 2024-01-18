@@ -3,8 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <title>Error_page</title>
+    <link th:href="@{/css/error.css}" rel="stylesheet" type="text/css" >
 </head>
 <body>
-<h1>Boli zadane nespravne data</h1>
+<header th:replace="~{fragments/navbar}"></header>
+<div class="error_content">
+    <h1>Nastala chyba</h1>
+    <img class="img_error" src="https://cdn.pixabay.com/photo/2023/03/22/13/27/error-7869555_1280.png">
+    <h1 th:text="${Error_mess}"></h1>
+</div>
+
+
 </body>
 </html>

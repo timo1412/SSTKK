@@ -1,0 +1,10 @@
+
+.error_content {
+    text-align: center;
+}
+
+.img_error {
+    max-width: 35%;
+    height: auto;
+    border-radius: 30px; /* Zaoblené okraje */
+}
