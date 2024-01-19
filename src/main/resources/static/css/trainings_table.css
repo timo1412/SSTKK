@@ -7,7 +7,7 @@ body{
     background-color: #32312f;
     font-family: sans-serif;
 }
-.table-container{
+.table-container_me{
     padding: 0 10%;
     margin: 40px auto 0;
 }
@@ -17,14 +17,14 @@ body{
     color: #f1f1f1;
     margin-bottom: 40px;
 }
-.table{
+.table_me{
     width: 100%;
     border-collapse: collapse;
 }
-.table thead{
+.table_me thead{
     background-color: red;
 }
-.table thead th tr {
+.table_me thead th tr {
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.35px;
@@ -34,7 +34,7 @@ body{
     vertical-align: top;
     border: 1px solid #dee2e685;
 }
-.table tbody tr td{
+.table_me tbody tr td{
     font-size: 14px;
     letter-spacing: 0.35px;
     font-weight: normal;
@@ -45,23 +45,23 @@ body{
     border: 1px solid #dee2e685;
 }
 @media (max-width: 768px) {
-    .table thead{
+    .table_me thead{
         display: none;
     }
-    .table, .table tbody,.table tr ,.table td{
+    .table_me, .table_me tbody,.table_me tr ,.table_me td{
         display: block;
         width: 100%;
     }
-    .table tr{
+    .table_me tr{
         margin-bottom: 15px;
     }
-    .table tbody tr td{
+    .table_me tbody tr td{
         text-align: right;
         padding-left: 50%;
         position: relative;
         min-height: 32px;
     }
-    .table td::before{
+    .table_me td::before{
         content: attr(data-label);
         position: absolute;
         left: 0;

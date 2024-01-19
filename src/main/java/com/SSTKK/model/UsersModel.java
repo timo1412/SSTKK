@@ -7,12 +7,30 @@ import java.util.Objects;
 @Entity
 @Table(name = "users_table")
 public class UsersModel {
+
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     String login;
     String password;
     String email;
+    Role role;
+
+    public enum Role {
+        USER, ADMIN
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+
 
     public Integer getId() {
         return id;

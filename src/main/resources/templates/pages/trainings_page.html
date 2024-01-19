@@ -4,14 +4,23 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link th:href="@{/css/trainings_table.css}" rel="stylesheet" type="text/css" >
+    <script src="webjars/jquery/3.6.0/jquery.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Bootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+
 </head>
 <body>
 <header th:replace="~{fragments/navbar}"></header>
-<div class="table-container">
-    <table class="table">
+<div class="table-container_me">
+    <table class="table_me">
         <thead>
         <tr>
-            <th>Deň</th>
+            <th>Den</th>
             <th>15:00</th>
             <th>16:00</th>
             <th>17:00</th>
@@ -21,53 +30,92 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td data-label="Deň">Pondelok</td>
-            <td data-label="15:00"></td>
-            <td data-label="16:00"></td>
-            <td data-label="17:00"></td>
-            <td data-label="18:00"></td>
-            <td data-label="19:00"></td>
-            <td data-label="20:00"></td>
-        </tr>
-        <tr>
-            <td data-label="Deň">Utorok</td>
-            <td data-label="15:00"></td>
-            <td data-label="16:00"></td>
-            <td data-label="17:00"></td>
-            <td data-label="18:00"></td>
-            <td data-label="19:00"></td>
-            <td data-label="20:00"></td>
-        </tr>
-        <tr>
-            <td data-label="Deň">Streda</td>
-            <td data-label="15:00"></td>
-            <td data-label="16:00"></td>
-            <td data-label="17:00"></td>
-            <td data-label="18:00"></td>
-            <td data-label="19:00"></td>
-            <td data-label="20:00"></td>
-        </tr>
-        <tr>
-            <td data-label="Deň">Štvrtok</td>
-            <td data-label="15:00"></td>
-            <td data-label="16:00"></td>
-            <td data-label="17:00"></td>
-            <td data-label="18:00"></td>
-            <td data-label="19:00"></td>
-            <td data-label="20:00"></td>
-        </tr>
-        <tr>
-            <td data-label="Deň">Piatok</td>
-            <td data-label="15:00"></td>
-            <td data-label="16:00"></td>
-            <td data-label="17:00"></td>
-            <td data-label="18:00"></td>
-            <td data-label="19:00"></td>
-            <td data-label="20:00"></td>
+        <tr th:each="den : ${dny}">
+            <td th:text="${den}"></td>
+            <td th:each="cas : ${casy}">
+                <span th:each="trening : ${Treningy}" th:if="${trening.day.equals(den) and trening.time.equals(cas)}" th:text="${trening.description}"></span>
+            </td>
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-success" data-toggle="modal" data-target="#myModal">Vytvoriť príspevok</button>
 </div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Vytvoriť príspevok</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="inputText1">Text 1:</label>
+                        <input type="text" name="day" class="form-control" id="inputText1" placeholder="Zadajte text 1">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText2">Text 2:</label>
+                        <input type="text" name="time" class="form-control" id="inputText2" placeholder="Zadajte text 2">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputText3">Text 3:</label>
+                        <input type="text" name="description" class="form-control" id="inputText3" placeholder="Zadajte text 3">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="potvrditBtn">Potvrdiť</button>
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Zavrieť</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('[data-toggle="modal"]').click(function() {
+            var target = $(this).data('target');
+            $(target).modal('show');
+        });
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('#potvrditBtn').click(function() {
+            // Získajte hodnoty z vstupných polí, ak sú potrebné
+            var text1 = $('#inputText1').val();
+            var text2 = $('#inputText2').val();
+            var text3 = $('#inputText3').val();
+
+            $.ajax({
+                type: 'POST',
+                url: '/addTraining',
+                contentType: 'application/json',  // nastaviť Content-Type na application/json
+                data: JSON.stringify({
+                    day: text1,
+                    time: text2,
+                    description: text3
+                }),
+                success: function(response) {
+                    console.log('Backend odpoveď:', response);
+                    // Môžete spracovať odpoveď alebo vykonať ďalšie kroky
+                },
+                error: function(error) {
+                    console.error('Chyba pri volaní backendu:', error);
+                }
+            });
+
+            // Zatvorte modálne okno
+            $('#myModal').modal('hide');
+        });
+    });
+</script>
+
+
 </body>
 </html>
