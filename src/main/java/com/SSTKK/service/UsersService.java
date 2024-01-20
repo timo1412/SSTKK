@@ -5,6 +5,8 @@ import com.SSTKK.repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsersService {
     private final UsersRepository usersRepository;
@@ -32,6 +34,9 @@ public class UsersService {
     }
     public  UsersModel authenticate(String login,String password){
         return usersRepository.findByLoginAndPassword(login,password).orElse(null);
+    }
 
+    public List<UsersModel> getAllUsers(){
+        return usersRepository.findAll();
     }
 }

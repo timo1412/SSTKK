@@ -18,7 +18,7 @@ public class TrainingsControler {
     public ArrayList<String> days = new ArrayList<>();
     @GetMapping("/trainings")
     public String getTrainnigs(Model model) {
-        model.addAttribute("dny", Arrays.asList("Pondelok", "Utorok", "Streda", "Stvrtok", "Piatok"));
+        model.addAttribute("dny", Arrays.asList("Pondelok", "Utorok", "Streda", "Štvrtok", "Piatok"));
         model.addAttribute("casy", Arrays.asList("15:00", "16:00", "17:00", "18:00", "19:00", "20:00"));
         model.addAttribute("Treningy", trainingService.getAllTrainings());
         return "pages/trainings_page";
@@ -31,6 +31,14 @@ public class TrainingsControler {
         }
         trainingService.createTraining(request.getDay(),request.getTime(),request.getDescription());
         System.out.println(request.getDay() + " " + request.getTime() + " " + request.getDescription());
+        return "redirect:/trainings";
+    }
+
+    @PostMapping("/deleteTraining/{id}")
+    @ResponseBody
+    public String deleteTraining(@PathVariable Integer id) {
+        trainingService.deleteTraining(id);
+        System.out.println("Idem mazat: " + id );
         return "redirect:/trainings";
     }
 }

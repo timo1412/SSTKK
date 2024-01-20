@@ -33,4 +33,8 @@ public class TrainingService {
             return trainingsRepository.save(training);
         }
     }
+    public boolean deleteTraining(Integer idTraining){
+        trainingsRepository.deleteById(idTraining);
+        return trainingsRepository.findById(idTraining) != null ? true : false;
+    }
 }

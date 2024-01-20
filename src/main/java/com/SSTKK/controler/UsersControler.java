@@ -17,9 +17,10 @@ public class UsersControler {
         this.usersService = usersService;
     }
 
-    @GetMapping("/trainings")
-    public String getTableTrainings(){
-        return "pages/trainings_page";
+    @GetMapping("/users_page")
+    public String getUsers(Model model){
+        model.addAttribute("users",usersService.getAllUsers());
+        return "pages/users_page";
     }
 
     @GetMapping("/error_page")
