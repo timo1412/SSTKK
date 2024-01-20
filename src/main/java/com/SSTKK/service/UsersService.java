@@ -26,7 +26,7 @@ public class UsersService {
             usersModel.setLogin(login);
             usersModel.setPassword(password);
             usersModel.setEmail(email);
-            usersModel.setRole(UsersModel.Role.ADMIN);
+            usersModel.setRole(UsersModel.Role.USER);
             return usersRepository.save(usersModel);
         }
     }

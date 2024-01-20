@@ -24,7 +24,7 @@
       <a th:if="${news.getPdfContent() != null}" th:href="@{'/downloadPdf?id=' + ${news.getId()}}" class="btn btn-primary">Zobraziť PDF</a>
       <div  th:with="userSession=${session.user}" >
         <a th:if="${userSession}" th:href="@{/editNews(id=${news.getId()})}"  class="btn btn-warning">Upravit</a>
-        <a th:if="${userSession}" th:href="@{/deleteNews(id=${news.getId()})}" class="btn btn-danger">Zmazat</a>
+        <a th:if="${userSession.role.toString() == 'ADMIN'}" th:href="@{/deleteNews(id=${news.getId()})}" class="btn btn-danger">Zmazat</a>
       </div>
     </div>
   </div>

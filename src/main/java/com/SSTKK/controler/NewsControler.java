@@ -1,6 +1,7 @@
 package com.SSTKK.controler;
 import com.SSTKK.model.NewsModel;
 import com.SSTKK.service.NewsServices;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -67,7 +68,8 @@ public class NewsControler {
     }
 
     @GetMapping("deleteNews")
-    public String getDeleteNewsPage(@RequestParam("id") Integer id, Model model){
+    public String getDeleteNewsPage(@RequestParam("id") Integer id, Model model, HttpSession session){
+
         NewsModel news = newsServices.getNewsById(id);
         model.addAttribute("news", news);
         return "pages/deleteNews_page";

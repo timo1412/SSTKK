@@ -104,6 +104,7 @@
                 success: function(response) {
                     console.log('Backend odpoveď:', response);
                     // Môžete spracovať odpoveď alebo vykonať ďalšie kroky
+                    window.location.reload();
                 },
                 error: function(error) {
                     console.error('Chyba pri volaní backendu:', error);
