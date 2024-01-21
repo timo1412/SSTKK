@@ -1,8 +1,6 @@
 package com.SSTKK.service;
-
 import com.SSTKK.model.UsersModel;
 import com.SSTKK.repository.UsersRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -38,5 +36,9 @@ public class UsersService {
 
     public List<UsersModel> getAllUsers(){
         return usersRepository.findAll();
+    }
+
+    public void updateUser(UsersModel updateUser){
+        usersRepository.updateUserWithId(updateUser.getId(),updateUser.getPassword(),updateUser.getLogin(),updateUser.getEmail());
     }
 }

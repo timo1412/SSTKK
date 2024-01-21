@@ -20,7 +20,8 @@
       </li>
       <li><a href="/trainings">Treningy</a></li>
       <li><a href="#" >História</a></li>
-      <li><a href="/user/users_page" >Členovia</a></li>
+      <li th:with="userSession=${session.user}" >
+        <a th:if="${userSession }"  th:text="Clenoivia" href="/user/users_page" ></a></li>
     </ul>
   </nav>
 </header>

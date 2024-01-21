@@ -1,5 +1,4 @@
 package com.SSTKK.controler;
-import com.SSTKK.repository.UsersRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import com.SSTKK.model.UsersModel;
@@ -47,6 +46,16 @@ public class UsersControler {
     public String getLoginPage(Model model){
         model.addAttribute("loginRequest",new UsersModel());
         return "pages/login_page";
+    }
+
+    @PostMapping("/updateUser")
+    public String updateTreining(@RequestBody UsersModel request, Model model, HttpSession session){
+        //UsersModel user = (UsersModel) session.getAttribute("user");
+        //user.getRole() == U
+        System.out.println("Idem upravovat" + request.getId());
+        System.out.println("Login: " + request.getLogin() + " Email: " + request.getEmail() + " password: " + request.getPassword());
+        usersService.updateUser(request);
+        return "redirect:/trainings";
     }
 
     @PostMapping("/register")

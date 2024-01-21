@@ -68,7 +68,7 @@ public class NewsControler {
     }
 
     @GetMapping("deleteNews")
-    public String getDeleteNewsPage(@RequestParam("id") Integer id, Model model, HttpSession session){
+    public String getDeleteNewsPage(@RequestParam("id") Integer id, Model model){
 
         NewsModel news = newsServices.getNewsById(id);
         model.addAttribute("news", news);

@@ -1,6 +1,8 @@
 package com.SSTKK.controler;
 import com.SSTKK.model.TrainingModel;
+import com.SSTKK.model.UsersModel;
 import com.SSTKK.service.TrainingService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,14 +27,21 @@ public class TrainingsControler {
     }
 
     @PostMapping("/addTraining")
-    public String addTreining(@RequestBody TrainingModel request){
-        if (request.getDay().isEmpty()){
-            return "pages/error_page";
+    public String addTreining(@RequestBody TrainingModel request, Model model,HttpSession session){
+        //UsersModel user = (UsersModel) session.getAttribute("user");
+        //user.getRole() == U
+
+        if (request.getDay().isEmpty()|| request.getTime().isEmpty() || request.getDescription().isEmpty()){
+            model.addAttribute("Error_mess","Boli nespravne zadane udaje den,cas alebo popis treningu");
+
+
+            return "redirect:/newsList";
         }
         trainingService.createTraining(request.getDay(),request.getTime(),request.getDescription());
         System.out.println(request.getDay() + " " + request.getTime() + " " + request.getDescription());
         return "redirect:/trainings";
     }
+
 
     @PostMapping("/deleteTraining/{id}")
     @ResponseBody

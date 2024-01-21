@@ -13,24 +13,30 @@ $(document).ready(function() {
         var selectedTime = $('#selectTime').val();
         var text3 = $('#inputText3').val();
 
-        $.ajax({
-            type: 'POST',
-            url: '/addTraining',
-            contentType: 'application/json',
-            data: JSON.stringify({
-                day: selectedDay,
-                time: selectedTime,
-                description: text3
-            }),
-            success: function(response) {
-                console.log('Backend odpoveď:', response);
-                window.location.reload();
-            },
-            error: function(error) {
-                console.error('Chyba pri volaní backendu:', error);
-            }
-        });
-        $('#myModal').modal('hide');
+        if (selectedDay.empty || selectedTime.empty || text3 === ""){
+            $('#myModal').modal('hide');
+            // window.location.reload();
+            alert("Neboli zadane udaje den,cas alebo popis treningu");
+        }else {
+            $.ajax({
+                type: 'POST',
+                url: '/addTraining',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    day: selectedDay,
+                    time: selectedTime,
+                    description: text3
+                }),
+                success: function(response) {
+                    console.log('Backend odpoveď:', response);
+                    window.location.reload();
+                },
+                error: function(error) {
+                    console.error('Chyba pri volaní backendu:', error);
+                }
+            });
+            $('#myModal').modal('hide');
+        }
     });
 });
 
