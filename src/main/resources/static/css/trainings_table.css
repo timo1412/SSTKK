@@ -45,23 +45,27 @@ body{
     border: 1px solid #dee2e685;
 }
 @media (max-width: 768px) {
-    .table_me thead{
+    .table_me thead {
         display: none;
     }
-    .table_me, .table_me tbody,.table_me tr ,.table_me td{
+
+    .table_me, .table_me tbody, .table_me tr, .table_me td {
         display: block;
         width: 100%;
     }
-    .table_me tr{
+
+    .table_me tbody tr {
         margin-bottom: 15px;
     }
-    .table_me tbody tr td{
-        text-align: right;
-        padding-left: 50%;
+
+    .table_me tbody tr td {
+        text-align: left;
+        padding-left: 15px;
         position: relative;
         min-height: 32px;
     }
-    .table_me td::before{
+
+    .table_me td::before {
         content: attr(data-label);
         position: absolute;
         left: 0;
@@ -70,7 +74,6 @@ body{
         font-weight: 600;
         font-size: 14px;
         text-align: left;
-
     }
 }
 

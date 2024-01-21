@@ -8,7 +8,6 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('#potvrditBtn').click(function() {
-        // Získajte hodnoty z vstupných polí, ak sú potrebné
         var selectedDay = $('#selectDay').val();
         var selectedTime = $('#selectTime').val();
         var text3 = $('#inputText3').val();

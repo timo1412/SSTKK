@@ -23,7 +23,6 @@ function editUser(userId, login, email, password) {
 
 
 function saveChanges() {
-    // Získanie hodnôt zo vstupných polí
     var id = $('#editId').val();
     var login = $('#editLogin').val();
     var email = $('#editEmail').val();
