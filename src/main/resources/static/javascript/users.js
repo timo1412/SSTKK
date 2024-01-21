@@ -57,3 +57,18 @@ function saveChanges() {
     });
     $('#editModal').modal('hide');
 }
+
+function deleteUser(button) {
+    var  userId = $(button).data('id');
+    $.ajax({
+        type: 'POST',
+        url: '/user/deleteUser/' + userId,
+        success: function(response) {
+            console.log('Backend odpoveď:', response);
+            window.location.reload();
+        },
+        error: function(error) {
+            console.error('Chyba pri volaní backendu:', error);
+        }
+    });
+}

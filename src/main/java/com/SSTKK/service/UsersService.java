@@ -33,7 +33,10 @@ public class UsersService {
     public  UsersModel authenticate(String login,String password){
         return usersRepository.findByLoginAndPassword(login,password).orElse(null);
     }
-
+    public boolean deleteUser(Integer idUser){
+        usersRepository.deleteById(idUser);
+        return usersRepository.findById(idUser) != null ? true : false;
+    }
     public List<UsersModel> getAllUsers(){
         return usersRepository.findAll();
     }

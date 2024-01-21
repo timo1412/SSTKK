@@ -89,4 +89,12 @@ public class UsersControler {
             return "pages/error_page";
         }
     }
+
+    @PostMapping("/deleteUser/{id}")
+    @ResponseBody
+    public String deleteUser(@PathVariable Integer id) {
+        usersService.deleteUser(id);
+        System.out.println("Idem mazat: " + id );
+        return "redirect:/users_page";
+    }
 }

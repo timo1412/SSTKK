@@ -32,12 +32,11 @@
     <td th:text="${user.getEmail()}"></td>
     <td th:text="${user.getPassword()}"></td>
     <td>
-      <div style="display: flex; align-items: center;">
-        <button class="btn btn-danger btn-sm" ><i class="fas fa-trash-alt"></i></button>
-        <button class="btn btn-warning btn-sm" style="margin-left: 5px;"
+      <div th:with="userSession=${session.user}" style="display: flex; align-items: center;">
+        <button th:if="${userSession != null and userSession.role.toString() == 'ADMIN'}" class="btn btn-danger btn-sm" th:attr="data-id=${user.id}" onclick="deleteUser(this)"><i class="fas fa-trash-alt"></i></button>
+        <button th:if="${userSession != null and userSession.role.toString() == 'ADMIN'}" class="btn btn-warning btn-sm" style="margin-left: 5px;"
                 data-toggle="modal" data-target="#editModal"
                 th:attr="onclick=|editUser('${user.getId()}','${user.getLogin()}','${user.getEmail()}','${user.getPassword()}')|">
-<!--                th:attr="userid=${user.getId()}, login=${user.getLogin()}, email=${user.getEmail()}, password=${user.getPassword()}">-->
           <i class="fas fa-edit"></i>
         </button>
       </div>

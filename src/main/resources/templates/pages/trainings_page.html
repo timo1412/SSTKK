@@ -34,8 +34,8 @@
             <span th:each="trening : ${Treningy}" th:if="${trening.day.equals(den) and trening.time.equals(cas)}">
                 <span th:text="${trening.description}" style="margin-right: 10px;"></span>
                 <div style="display: flex; align-items: center;">
-                    <button th:if="${userSession }" class="btn btn-danger btn-sm" th:attr="data-id=${trening.id}" onclick="deleteTraining(this)" ><i class="fas fa-trash-alt"></i></button>
-                    <button th:if="${userSession }" class="btn btn-warning btn-sm" style="margin-left: 5px;"><i class="fas fa-edit"></i></button>
+                    <button th:if="${userSession != null and userSession.role.toString() == 'ADMIN'}" class="btn btn-danger btn-sm" th:attr="data-id=${trening.id}" onclick="deleteTraining(this)" ><i class="fas fa-trash-alt"></i></button>
+<!--                    <button th:if="${userSession != null and userSession.role.toString() == 'ADMIN'}" class="btn btn-warning btn-sm" style="margin-left: 5px;"><i class="fas fa-edit"></i></button>-->
                 </div>
             </span>
             </td>
