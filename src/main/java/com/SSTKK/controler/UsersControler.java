@@ -50,8 +50,15 @@ public class UsersControler {
 
     @PostMapping("/updateUser")
     public String updateTreining(@RequestBody UsersModel request, Model model, HttpSession session){
-        //UsersModel user = (UsersModel) session.getAttribute("user");
-        //user.getRole() == U
+        UsersModel logUser = (UsersModel)session.getAttribute("user");
+        if (!logUser.getRole().toString().equals("ADMIN")){
+            model.addAttribute("Error_mess","Na tuto akciu nemate pravo, je potrebne byt prihlaseny ako admin");
+            return "pages/error_page";
+        }
+        if (request.getEmail().isEmpty() || request.getLogin().isEmpty() || request.getPassword().isEmpty()){
+            model.addAttribute("Error_mess","Niektore udaje su prazdne ziadne pole pouzivatela nesmie ostat prazdne");
+            return "pages/error_page";
+        }
         System.out.println("Idem upravovat" + request.getId());
         System.out.println("Login: " + request.getLogin() + " Email: " + request.getEmail() + " password: " + request.getPassword());
         usersService.updateUser(request);
@@ -92,7 +99,12 @@ public class UsersControler {
 
     @PostMapping("/deleteUser/{id}")
     @ResponseBody
-    public String deleteUser(@PathVariable Integer id) {
+    public String deleteUser(@PathVariable Integer id, HttpSession session,Model model) {
+        UsersModel logUser = (UsersModel)session.getAttribute("user");
+        if (!logUser.getRole().toString().equals("ADMIN")){
+            model.addAttribute("Error_mess","Na tuto akciu nemate pravo, je potrebne byt prihlaseny ako admin");
+            return "pages/error_page";
+        }
         usersService.deleteUser(id);
         System.out.println("Idem mazat: " + id );
         return "redirect:/users_page";

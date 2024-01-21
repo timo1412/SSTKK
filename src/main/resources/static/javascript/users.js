@@ -29,6 +29,11 @@ function saveChanges() {
     var email = $('#editEmail').val();
     var password = $('#editPassword').val();
 
+    if (login === "" || email === "" || password === ""){
+        $('#editModal').modal('hide')
+        alert("Niektore udaje zostali sprazdne je potrebne aby boli vsetky udaje vyplnene");
+        window.location.href = "/error_page";
+    }
     console.log(id);
     console.log(login);
     console.log(email);

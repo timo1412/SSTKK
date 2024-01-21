@@ -18,9 +18,21 @@ public class NewsModel {
     private String content;
     @Column
     private String creator;
+    @ManyToOne
+    UsersModel autor;
     @Lob
     @Column(name = "pdf_content", length = 1000)
     private byte[] pdfContent;
+
+    public UsersModel getAutor() {
+        return autor;
+    }
+
+    public void setAutor(UsersModel autor) {
+        this.autor = autor;
+    }
+
+
 
     @Transient
     private MultipartFile pdfFile;

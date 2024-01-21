@@ -14,6 +14,4 @@ public class RootController {
     public String root(Model model) {
         return "pages/index";
     }
-
-
 }

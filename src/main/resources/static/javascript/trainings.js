@@ -13,10 +13,10 @@ $(document).ready(function() {
         var selectedTime = $('#selectTime').val();
         var text3 = $('#inputText3').val();
 
-        if (selectedDay.empty || selectedTime.empty || text3 === ""){
+        if (selectedDay === "" || selectedTime === "" || text3 === ""){
             $('#myModal').modal('hide');
-            // window.location.reload();
             alert("Neboli zadane udaje den,cas alebo popis treningu");
+            window.location.href = "/error_page";
         }else {
             $.ajax({
                 type: 'POST',

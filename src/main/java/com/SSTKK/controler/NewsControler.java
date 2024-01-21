@@ -1,5 +1,6 @@
 package com.SSTKK.controler;
 import com.SSTKK.model.NewsModel;
+import com.SSTKK.model.UsersModel;
 import com.SSTKK.service.NewsServices;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,21 +41,36 @@ public class NewsControler {
     }
     @PostMapping("/addNews")
     public String AddNewNews(@ModelAttribute NewsModel newsModel,
-                             @RequestParam("pdfFile") MultipartFile pdfFile,Model model){
+                             @RequestParam("pdfFile") MultipartFile pdfFile,Model model,
+                             HttpSession session){
 
         newsModel.setPdfFile(pdfFile);
-        if (newsModel.getCreator().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getContent().isEmpty()){
-            model.addAttribute("Error_mess","Dojebal si to");
+        UsersModel user = (UsersModel)session.getAttribute("user");
+        if (user == null){
+            model.addAttribute("Error_mess","Na dokoncenie tejto akcie je nutne byt prihlaseny");
             return "pages/error_page";
         }
+        if (newsModel.getCreator().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getContent().isEmpty()){
+            model.addAttribute("Error_mess","Neboli zadane spravne udaje ktore su povinne: autor,nadpis obsah");
+            return "pages/error_page";
+        }
+        newsModel.setAutor(user);
         if (newsServices.addNew(newsModel)){
             return "redirect:/newsList";
         }
+        model.addAttribute("Error_mess","Natala neocakavana chyba, skuste akciu zopakovat a uistite sa ze robite vsetko spravne");
         return "pages/error_page";
     }
     @PostMapping("editNews")
-    public String editNews(@ModelAttribute NewsModel newsModel){
+    public String editNews(@ModelAttribute NewsModel newsModel,HttpSession session,Model model){
+
+        UsersModel user = (UsersModel)session.getAttribute("user");
+        if (user == null){
+            model.addAttribute("Error_mess","Na dokoncenie tejto akcie je nutne byt prihlaseny");
+            return "pages/error_page";
+        }
         if (newsModel.getContent().isEmpty() || newsModel.getTitle().isEmpty() || newsModel.getCreator().isEmpty()){
+            model.addAttribute("Error_mess","Na dokoncenie tejto akcie je nutne byt prihlaseny");
             return "pages/error_page";
         }
         newsServices.update(newsModel);
@@ -75,7 +91,12 @@ public class NewsControler {
         return "pages/deleteNews_page";
     }
     @PostMapping("deleteNews")
-    public String deleteNews(@ModelAttribute NewsModel newsModel){
+    public String deleteNews(@ModelAttribute NewsModel newsModel,HttpSession session,Model model){
+        UsersModel user = (UsersModel)session.getAttribute("user");
+        if (user == null){
+            model.addAttribute("Error_mess","Na dokoncenie tejto akcie je nutne byt prihlaseny");
+            return "pages/error_page";
+        }
         System.out.println(newsModel.getId());
         if (newsServices.deleteNew(newsModel.getId())){
             return "redirect:/newsList";

@@ -2,6 +2,8 @@ package com.SSTKK.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,6 +19,16 @@ public class UsersModel {
     String password;
     String email;
     Role role;
+    @OneToMany(fetch = FetchType.EAGER)
+    List<NewsModel> addNews = new ArrayList<>();
+
+    public List<NewsModel> getAddNews() {
+        return addNews;
+    }
+
+    public void setAddNews(List<NewsModel> addNews) {
+        this.addNews = addNews;
+    }
 
     public enum Role {
         USER, ADMIN

@@ -28,20 +28,20 @@ public class TrainingsControler {
 
     @PostMapping("/addTraining")
     public String addTreining(@RequestBody TrainingModel request, Model model,HttpSession session){
-        //UsersModel user = (UsersModel) session.getAttribute("user");
-        //user.getRole() == U
+        UsersModel user = (UsersModel) session.getAttribute("user");
+        if (!user.getRole().toString().equals("ADMIN")){
+            model.addAttribute("Error_mess","Na tuto akciu nemate pravo, je potrebne byt prihlaseny ako admin");
+            return "pages/error_page";
+        }
 
         if (request.getDay().isEmpty()|| request.getTime().isEmpty() || request.getDescription().isEmpty()){
             model.addAttribute("Error_mess","Boli nespravne zadane udaje den,cas alebo popis treningu");
-
-
-            return "redirect:/newsList";
+            return "pages/error_page";
         }
         trainingService.createTraining(request.getDay(),request.getTime(),request.getDescription());
         System.out.println(request.getDay() + " " + request.getTime() + " " + request.getDescription());
         return "redirect:/trainings";
     }
-
 
     @PostMapping("/deleteTraining/{id}")
     @ResponseBody
